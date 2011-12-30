@@ -48,7 +48,7 @@ function login_cas($username, $password)
     $error_msg = 'NOT IMPLEMENTED';
 
     if (phpCAS::isAuthenticated()) {
-        $user_row = get_user_row(phpCAS::getUser(), $user_anonymous);
+        $user_row = get_user_row(phpCAS::getUser(), $user_anonymous, false);
         if ( $user_row['user_id'] != ANONYMOUS ) {
             $error_msg = false;
             $status = LOGIN_SUCCESS;
@@ -102,12 +102,17 @@ function acp_cas(&$new)
 	);
 }
 
-function get_user_row($username, $default_row = array())
+function get_user_row($username, $default_row = array(), $select_all = true)
 {
     global $db;
     $user_row = $default_row;
-    $sql ='SELECT user_id, username, user_password, user_passchg, user_email, user_type, user_style
-        FROM ' . USERS_TABLE . "
+    $sql = 'SELECT';
+    if ($select_all)
+        $sql .= ' *'
+    else
+        $sql .= ' user_id, username, user_password, user_passchg, user_email, user_type, user_style'
+        
+    $sql .= 'FROM ' . USERS_TABLE . "
         WHERE username_clean = '" . $db->sql_escape(utf8_clean_string($username)) . "'";
     $result = $db->sql_query($sql);
     $row = $db->sql_fetchrow($result);

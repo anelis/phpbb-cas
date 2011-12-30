@@ -15,17 +15,30 @@
 				<email><![CDATA[gregoire.astruc@anelis.isima.fr]]></email>
 			</author>
 		</author-group>
-		<mod-version>0.0.1</mod-version>
+		<mod-version>0.0.2</mod-version>
 		<installation>
 			<level>easy</level>
 			<time>120</time>
 			<target-version>3.0.9</target-version>
 		</installation>
+		<history>
+			<entry>
+				<date>2011-12-30</date>
+				<rev-version>0.0.2</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Added french translation]]></change>
+				</changelog>
+				<changelog lang="fr">
+					<change><![CDATA[Ajout de la traduction française]]></change>
+				</changelog>
+			</entry>
+		</history>
 	</header>
 	<action-group>
 		<copy>
 			<file from="includes/auth/auth_cas.php" to="includes/auth/auth_cas.php"/>
 			<file from="language/en/mods/auth_cas.php" to="language/en/mods/auth_cas.php"/>
+			<file from="language/fr/mods/auth_cas.php" to="language/fr/mods/auth_cas.php"/>
 		</copy>
 	</action-group>
 </mod>
