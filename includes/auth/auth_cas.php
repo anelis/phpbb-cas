@@ -17,13 +17,16 @@ if ( !defined('IN_PHPBB') )
 
 include_once('CAS/CAS.php');
 
+phpCAS::client(CAS_VERSION_2_0, $config['cas_server'], (int) $config['cas_port'], $config['cas_uri']);
+phpCAS::setDebug();
+phpCAS::setNoCasServerValidation();
+
 /** 
 * Plugin initialization.
 */
 function init_cas()
 {
     global $config, $user;
-    $user->add_lang('mods/auth_cas');
     
     return false;
 }
@@ -31,31 +34,40 @@ function init_cas()
 function autologin_cas()
 {
     global $config, $db;
-    phpCAS::client(CAS_VERSION_2_0, $config['cas_host'], $config['cas_port'], $config['cas_uri'], false);
     phpCAS::forceAuthentication();
-    $username = phpCAS::getUser();
     
-    return get_user_row($username);
+    return get_user_row(phpCAS::getUser());
 }
 
 function login_cas($username, $password)
 {
     global $db, $config, $user;
-    $user_row = array('user_id' => ANONYMOUS);
-    $status = LOGIN_ERROR_EXTERNAL_AUTH;
+    $user_anonymous = array('user_id' => ANONYMOUS);
+    $user_row = $user_anonymous;
+    $status = LOGIN_SUCESS;
     $error_msg = 'NOT IMPLEMENTED';
+
+    if (phpCAS::isAuthenticated()) {
+        $user_row = get_user_row(phpCAS::getUser(), $user_anonymous);
+        if ( $user_row['user_id'] != ANONYMOUS ) {
+            $error_msg = false;
+            $status = LOGIN_SUCCESS;
+        }
+    }
     
     return array('status' => $status, 'error_msg' => $error_msg, 'user_row' => $user_row);
 }
 
 function logout_cas($user_row, $new_session)
 {
+    global $config;
     phpCAS::logout();
 }
 
-validate_session_cas($user_row)
+function validate_session_cas($user_row)
 {
-    return phpCAS::checkAuthentication();
+    global $config;
+    return phpCAS::isSessionAuthenticated();
 }
 
 /**
@@ -65,12 +77,13 @@ validate_session_cas($user_row)
 function acp_cas(&$new)
 {
 	global $user;
+	$user->add_lang('mods/auth_cas');
 
 	$tpl = '
 
 	<dl>
 		<dt><label for="cas_server">' . $user->lang['CAS_SERVER'] . ':</label><br /><span>' . $user->lang['CAS_SERVER_EXPLAIN'] . '</span></dt>
-		<dd><input type="text" id="cas_server" size="40" name="config[cas_server]" value="' . $new['cas_server'] . '" /></dd>
+		<dd><code>https://</code><input type="text" id="cas_server" size="40" name="config[cas_server]" value="' . $new['cas_server'] . '" /></dd>
 	</dl>
 	<dl>
 		<dt><label for="cas_port">' . $user->lang['CAS_PORT'] . ':</label><br /><span>' . $user->lang['CAS_PORT_EXPLAIN'] . '</span></dt>
@@ -91,8 +104,9 @@ function acp_cas(&$new)
 
 function get_user_row($username, $default_row = array())
 {
+    global $db;
     $user_row = $default_row;
-    $sql ='SELECT user_id, username, user_password, user_passchg, user_email, user_type
+    $sql ='SELECT user_id, username, user_password, user_passchg, user_email, user_type, user_style
         FROM ' . USERS_TABLE . "
         WHERE username_clean = '" . $db->sql_escape(utf8_clean_string($username)) . "'";
     $result = $db->sql_query($sql);

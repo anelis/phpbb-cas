@@ -36,7 +36,7 @@ $lang = array_merge($lang, array(
     'CAS_PORT'      => 'CAS server port',
         'CAS_PORT_EXPLAIN' => 'Port on which the CAS server is listening to.',
     'CAS_URI'       => 'CAS URI',
-        'Base URI of the cas server. Such as: /login, /cas...'
+        'CAS_URI_EXPLAIN' => 'Base URI of the cas server. Such as: /login, /cas...',
 ));
             
 ?>
