@@ -26,7 +26,7 @@ Now whenever your users will be logged in through [CAS][CAS].
 
 
 
-  [phpBB]: http//www.phpbb.com/
+  [phpBB]: http://www.phpbb.com/
   [CAS]: http://www.jasig.org/cas
   [AutoMOD]: http://www.phpbb.com/mods/automod/
   [latest]: https://github.com/anelis/phpbb-cas/zipball/master
