@@ -31,12 +31,14 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
                         
 $lang = array_merge($lang, array(
-    'CAS_SERVER'    => 'nom du serveur CAS',
-        'CAS_SERVER_EXPLAIN' => 'nom du serveur CAS, comme : cas.foo.biz',
-    'CAS_PORT'      => 'port du serveur CAS',
-        'CAS_PORT_EXPLAIN' => 'Port sur lequel le serveur CAS écoute.',
-    'CAS_URI'       => 'URI CAS',
-        'CAS_URI_EXPLAIN' => 'URI de base sur laquelle le serveur répond. Par exemple : /login, /cas...',
+    'CAS_SERVER'    => 'CAS server name',
+        'CAS_SERVER_EXPLAIN' => 'CAS server name, such as: cas.foo.biz',
+    'CAS_PORT'      => 'CAS server port',
+        'CAS_PORT_EXPLAIN' => 'Port on which the CAS server is listening to.',
+    'CAS_URI'       => 'CAS URI',
+        'CAS_URI_EXPLAIN' => 'Base URI of the cas server. Such as: /login, /cas...',
+    'CAS_VALIDATE'       => 'Valider le certificat du serveur CAS',
+        'CAS_VALIDATE_EXPLAIN' => 'Active/Désactive la validation du certificat SSL du serveur CAS',
 ));
             
 ?>

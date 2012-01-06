@@ -37,6 +37,8 @@ $lang = array_merge($lang, array(
         'CAS_PORT_EXPLAIN' => 'Port on which the CAS server is listening to.',
     'CAS_URI'       => 'CAS URI',
         'CAS_URI_EXPLAIN' => 'Base URI of the cas server. Such as: /login, /cas...',
+    'CAS_VALIDATE'       => 'Validate CAS server',
+        'CAS_VALIDATE_EXPLAIN' => 'Enable/Disable the validation of the CAS server SSL certificate',
 ));
             
 ?>

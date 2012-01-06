@@ -7,11 +7,13 @@
 		<meta name="generator" content="MODX file generated with PP MODX Creator by tumba25 (online version)"/>
 		<license><![CDATA[http://opensource.org/licenses/LGPL-2.1 GNU Lesser General Public License v2.1]]></license>
 		<title lang="en"><![CDATA[CAS Authentication plugin]]></title>
+		<title lang="fr"><![CDATA[Plugin d'authentification via CAS]]></title>
 		<description lang="en"><![CDATA[Enable (auto)login using Yale's CAS protocol.]]></description>
+		<description lang="fr"><![CDATA[Permet de s'(auto)identifier sur le forum phpBB grâce au protocole CAS.]]></description>
 		<author-group>
 			<author>
 				<realname><![CDATA[Grégoire Astruc]]></realname>
-				<username phpbbcom="no"><![CDATA[gregoire.astruc]]></username>
+				<username><![CDATA[gregoire.astruc]]></username>
 				<email><![CDATA[gregoire.astruc@anelis.isima.fr]]></email>
 			</author>
 		</author-group>
@@ -22,6 +24,20 @@
 			<target-version>3.0.9</target-version>
 		</installation>
 		<history>
+			<entry>
+				<date>2012-01-06</date>
+				<rev-version>0.0.3</rev-version>
+				<changelog lang="en">
+					<change><![CDATA[Updated english translation]]></change>
+					<change><![CDATA[Added ability to view the board as guest user]]></change>
+					<change><![CDATA[Automatic redirect to avoid phpbb login page]]></change>
+				</changelog>
+				<changelog lang="fr">
+					<change><![CDATA[Mise à jour de la traduction]]></change>
+					<change><![CDATA[Possibilité de voir le forum en tant qu'invité]]></change>
+					<change><![CDATA[Redirection automatique permettant d'éviter la page de login phpBB]]></change>
+				</changelog>
+			</entry>
 			<entry>
 				<date>2011-12-30</date>
 				<rev-version>0.0.2</rev-version>
